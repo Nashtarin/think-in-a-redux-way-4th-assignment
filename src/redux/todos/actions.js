@@ -5,6 +5,7 @@ import {
     COLORSELECTED,
     DELETED,
     LOADED,
+    TITLECHANGED,
     TOGGLED,
 } from "./actionTypes";
 
@@ -21,7 +22,15 @@ export const added = (todoText) => {
         payload: todoText,
     };
 };
-
+export const titlechanged=(todoid,todotext)=>{
+    return {
+        type:TITLECHANGED,
+        payload:{
+          todoid,
+          todotext
+        } 
+    }
+}
 export const toggled = (todoId) => {
     return {
         type: TOGGLED,

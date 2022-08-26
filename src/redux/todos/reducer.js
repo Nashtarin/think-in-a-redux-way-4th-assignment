@@ -5,6 +5,7 @@ import {
     COLORSELECTED,
     DELETED,
     LOADED,
+    TITLECHANGED,
     TOGGLED,
 } from "./actionTypes";
 import initialState from "./initialState";
@@ -63,6 +64,19 @@ const reducer = (state = initialState, action) => {
                     completed: true,
                 };
             });
+        case TITLECHANGED:
+            const { todoid, todotext } = action.payload;
+            return state.map(todo=>{
+                if(todo.id===todoid){
+                    return{
+                        ...todo,
+                        text:todotext
+                    }
+                }
+                else {
+                    return todo;
+                }
+            })
 
         case CLEARCOMPLETED:
             return state.filter((todo) => !todo.completed);

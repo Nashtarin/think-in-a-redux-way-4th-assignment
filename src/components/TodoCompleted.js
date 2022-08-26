@@ -7,7 +7,7 @@ const TodoCompleted = ({todo}) => {
     const handleStatusChange = (todoId) => {
         dispatch(toggled(todoId));
     };
-    const { text, id, completed, color } = todo;
+    const { text, id, completed } = todo;
     return (
         <div className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
         <div
