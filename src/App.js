@@ -18,9 +18,9 @@ function App() {
 
                     <TodoList />
 
-                    <hr className="mt-4" />
+                   
 
-                    <Footer />
+                    
                 </div>
             </div>
         </Provider>

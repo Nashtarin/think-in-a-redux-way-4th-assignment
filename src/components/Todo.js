@@ -1,15 +1,25 @@
 import { useDispatch } from "react-redux";
 import cancelImage from "../assets/images/cancel.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { colorSelected, deleted, toggled } from "../redux/todos/actions";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 export default function Todo({ todo }) {
     const dispatch = useDispatch();
+    const [titleInput,setTitleInput]=useState(false)
+    const [input,setInput]=useState('')
 
     const { text, id, completed, color } = todo;
 
     const handleStatusChange = (todoId) => {
         dispatch(toggled(todoId));
     };
+    const inputHandler=(e)=>{
+        setInput(e.target.value)
+        
+    }
+
 
     const handleColorChange = (todoId, color) => {
         dispatch(colorSelected(todoId, color));
@@ -18,7 +28,9 @@ export default function Todo({ todo }) {
     const handleDelete = (todoId) => {
         dispatch(deleted(todoId));
     };
-
+   const titleInputHandler=()=>{
+    setTitleInput(true)
+   }
     return (
         <div className="flex justify-start items-center p-2 hover:bg-gray-100 hover:transition-all space-x-4 border-b border-gray-400/20 last:border-0">
             <div
@@ -46,9 +58,10 @@ export default function Todo({ todo }) {
             <div
                 className={`select-none flex-1 ${completed && "line-through"}`}
             >
-                {text}
+            {text}
+                {/* {titleInput ?<input onChange={inputHandler}type='text' value={text}/>:{text}} */}
             </div>
-
+             <button onClick={titleInputHandler}><FontAwesomeIcon icon={faEdit} /></button>
             <div
                 className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer hover:bg-green-500 border-green-500 ${
                     color === "green" && "bg-green-500"
