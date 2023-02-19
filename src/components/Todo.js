@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { colorSelected, deleted, toggled } from "../redux/todos/actions";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import titleChanging from "../redux/todos/thunk/titleChanging";
 
 export default function Todo({ todo }) {
     const dispatch = useDispatch();
@@ -35,6 +36,11 @@ export default function Todo({ todo }) {
     const handleDelete = (todoId) => {
         dispatch(deleted(todoId));
     };
+    const handletitlechange=(id,input)=>{
+        // e.preventdefault()
+        dispatch(titleChanging(id,input))
+
+    }
 //    const titleInputHandler=()=>{
 //     setTitleInput(true)
 //    }
@@ -65,8 +71,9 @@ export default function Todo({ todo }) {
             <div
                 className={`select-none flex-1 ${completed && "line-through"}`}
             >
-            {text}
-                {titleInput && <input  type="text" value={text}/>}
+            
+                {titleInput ? <form onSubmit={handletitlechange(id,input)}><input onChange={inputGivenHandler} type="text" value={text}/>
+               <br/> <button type="submit">ok</button></form>:<span>{text}</span>}
             </div>
              <button onClick={inputHandler}><FontAwesomeIcon icon={faEdit} /></button>
             <div
